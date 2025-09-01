@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} - Order {{ order.id }}{% endblock %}
+
+{% block content %}
+<h2 class="section-title text-center mb-4">Order Confirmation</h2>
+<div class="card mx-auto p-4" style="max-width:800px;">
+  <h5>Order ID: <strong>{{ order.id }}</strong></h5>
+  <p class="text-muted">Placed: {{ order.created_at }}</p>
+
+  <ul class="list-group mb-3">
+    {% for it in order.items %}
+    <li class="list-group-item d-flex justify-content-between">
+      <div>
+        <div class="fw-bold">{{ it.product.name }}</div>
+        <div class="small text-muted">Qty: {{ it.quantity }}</div>
+      </div>
+      <div>Ksh {{ '%.2f'|format(it.subtotal) }}</div>
+    </li>
+    {% endfor %}
+    <li class="list-group-item d-flex justify-content-between">
+      <strong>Total</strong>
+      <strong>Ksh {{ '%.2f'|format(order.total) }}</strong>
+    </li>
+  </ul>
+
+  <h6>Shipping Address</h6>
+  <p>{{ order.address.street }}, House {{ order.address.house_number }}, {{ order.address.city }}</p>
+  <h6>Payment</h6>
+  <p>{{ order.payment_method|replace('_', ' ')|title }}</p>
+
+  <a href="{{ url_for('index') }}" class="btn btn-outline-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}

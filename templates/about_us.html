@@ -1,13 +1,30 @@
 {% extends "base.html" %}
+{% block title %}About{% endblock %}
+
 {% block content %}
-<div class="container my-5">
-  <h2 class="mb-4">About Immortal</h2>
-  <p>
-    Welcome to <strong>Immortal Furniture</strong>, where timeless design meets durability. 
-    We specialize in creating elegant living room sets, bedroom furniture, coffee tables, and dining sets.
-  </p>
-  <p>
-    Our mission is to make every home feel alive with stylish, affordable, and long-lasting furniture.
-  </p>
-</div>
+<section class="py-5 text-center">
+    <h2 class="section-title">About Immortal Furniture</h2>
+    <p class="lead mx-auto" style="max-width: 800px;">
+        At Immortal Furniture, we believe furniture is more than just decor — it’s an investment in 
+        comfort, lifestyle, and legacy. Our mission is to provide timeless pieces that combine 
+        craftsmanship, sustainability, and style.
+    </p>
+</section>
+
+<section class="py-5">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <h4 class="fw-bold">Our Vision</h4>
+            <p>To be Africa’s most trusted furniture brand known for elegance and durability.</p>
+        </div>
+        <div class="col-md-4">
+            <h4 class="fw-bold">Our Mission</h4>
+            <p>To bring affordable luxury to every household through innovative designs.</p>
+        </div>
+        <div class="col-md-4">
+            <h4 class="fw-bold">Our Promise</h4>
+            <p>We stand behind our craftsmanship, ensuring satisfaction with every purchase.</p>
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -1,0 +1,40 @@
+:root{
+  --wood: #3E2723;
+  --gold: #d4a373;
+  --muted: #f6f2ee;
+  --text: #222;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
+
+.brand-mark{
+  width:44px;height:44px;border-radius:8px;background:var(--wood);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:'Poppins';
+}
+.navbar-brand .h5 { font-family: 'Playfair Display', serif; font-weight:700; }
+
+.section-title { font-size:1.6rem; font-weight:600; margin-bottom:1.5rem; font-family: 'Playfair Display', serif; }
+
+.btn-warning{ background: var(--gold); border-color: var(--gold); color:#111; }
+.btn-warning:hover{ background:#b07d4e; border-color:#b07d4e; color:#fff; }
+
+.hero { border-radius:8px; overflow:hidden; }
+
+.truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card { border-radius:10px; }
+
+.table td, .table th { vertical-align: middle; }
+
+@media (max-width:767px){
+  .hero .col-md-6 { padding: 1.5rem !important; }
+}
