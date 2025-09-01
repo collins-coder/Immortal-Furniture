@@ -5,31 +5,54 @@
 
 <style>
 .hero-bg {
-  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12)), 
-              url("{{ url_for('static', filename='images/hero.jpg') }}") 
-              center center / cover;
+  background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
+  min-height: 420px;          
+  display: flex;
+  align-items: center;
+}
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12));
+  padding: 3rem;
+  width: 100%;
 }
 </style>
 
 <section class="hero rounded-3 overflow-hidden mb-5">
-  <div class="row g-0 align-items-center">
-    <div class="col-md-6 p-5 hero-bg">
-      <h1 class="display-5 fw-bold">Immortal Furniture</h1>
-      <p class="lead">Timeless pieces crafted to last generations — design, comfort and durability in every stitch.</p>
-      <a href="{{ url_for('products') }}" class="btn btn-warning btn-lg">Shop Now</a>
+  <div class="row g-0">
+    <div class="col-md-6 hero-bg">
+      <div class="hero-overlay">
+        <h1 class="display-5 fw-bold">Immortal Furniture</h1>
+        <p class="lead">Timeless pieces crafted to last generations — design, comfort and durability in every stitch.</p>
+        <a href="{{ url_for('products') }}" class="btn btn-warning btn-lg">Shop Now</a>
+      </div>
     </div>
+
     <div class="col-md-6 p-4 bg-light">
       <h3 class="mb-3">Who we are</h3>
-      <p>At Immortal Furniture we craft premium home furniture using sustainably sourced wood and ethical practices. Our collections combine classic lines with modern finishes so your home feels remarkable.</p>
+      <p>At Immortal Furniture we craft premium home furniture using sustainably sourced wood and ethical practices.
+         Our collections combine classic lines with modern finishes so your home feels remarkable.</p>
 
-      <h5 class="mt-4"> We offer;</h5>
+      <h5 class="mt-4">We offer:</h5>
       <ul>
         <li>High-quality materials</li>
         <li>Timeless design</li>
         <li>Reliable customer service</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section class="mb-5">
+  <h2 class="section-title text-center mb-4">About Us</h2>
+  <div class="container">
+    <p class="text-center">
+      Immortal Furniture blends craftsmanship with modern aesthetics to deliver furniture that stands the test of time.
+      From living room statement pieces to cozy bedroom suites, our goal is to make your space feel like home.
+    </p>
   </div>
 </section>
 
@@ -48,6 +71,30 @@
       </div>
     </div>
     {% endfor %}
+  </div>
+</section>
+
+<section class="mb-5 text-center">
+  <h2 class="mb-4">Why Choose Us?</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card p-3 h-100">
+        <h5>Quality Craftsmanship</h5>
+        <p>Premium materials and careful joinery ensure long-lasting pieces.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3 h-100">
+        <h5>Affordable Luxury</h5>
+        <p>Thoughtfully priced furniture that doesn’t compromise on style.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3 h-100">
+        <h5>Reliable Service</h5>
+        <p>Helpful support from order to delivery and aftercare.</p>
+      </div>
+    </div>
   </div>
 </section>
 

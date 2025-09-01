@@ -7,7 +7,6 @@ import datetime
 
 app = Flask(__name__)
 app.secret_key = "replace_this_with_a_secure_random_value"
-
 PRODUCTS = [
     {"id": 1, "name": "Classic Oak Sofa", "price": 49999.00, "description": "Comfortable 3-seater sofa crafted in solid oak with premium cushions.", "image": "sofa.jpg", "category": "Living Room"},
     {"id": 2, "name": "Mid-Century Dining Chair", "price": 7999.00, "description": "Stylish dining chair with walnut legs and upholstered seat.", "image": "chair.jpg", "category": "Dining"},
@@ -16,18 +15,19 @@ PRODUCTS = [
 ]
 
 ORDERS = []
-
 def get_product(product_id):
     for p in PRODUCTS:
         if int(p["id"]) == int(product_id):
             return p
     return None
 
+
 def money(v):
     return f"{Decimal(str(v)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP):,}"
 
+
 def cart_items_and_total():
-    cart = session.get("cart", {})  # {product_id: qty}
+    cart = session.get("cart", {}) 
     items = []
     total = Decimal("0.00")
     for pid_str, qty in cart.items():
@@ -42,22 +42,25 @@ def cart_items_and_total():
     return items, float(total)
 
 @app.context_processor
-def inject_cart_count():
+def inject_globals():
+    from datetime import datetime
     cart = session.get("cart", {})
     count = sum(cart.values()) if cart else 0
-    return {"cart_count": count}
+    return {
+        "cart_count": count,
+        "current_year": datetime.utcnow().year
+    }
 
-# ------------------------
-# Routes
-# ------------------------
 @app.route("/")
 def index():
     featured = PRODUCTS[:3]
     return render_template("index.html", featured=featured)
 
+
 @app.route("/products")
 def products():
     return render_template("products.html", products=PRODUCTS)
+
 
 @app.route("/product/<int:product_id>")
 def product_detail(product_id):
@@ -65,6 +68,7 @@ def product_detail(product_id):
     if not prod:
         abort(404)
     return render_template("product_detail.html", product=prod)
+
 
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
@@ -89,6 +93,7 @@ def add_to_cart():
     next_url = request.form.get("next") or url_for("cart")
     return redirect(next_url)
 
+
 @app.route("/update_cart", methods=["POST"])
 def update_cart():
     cart = session.get("cart", {})
@@ -108,6 +113,7 @@ def update_cart():
     flash("Cart updated.", "success")
     return redirect(url_for("cart"))
 
+
 @app.route("/remove_from_cart/<int:product_id>")
 def remove_from_cart(product_id):
     cart = session.get("cart", {})
@@ -117,6 +123,7 @@ def remove_from_cart(product_id):
     flash("Item removed from cart.", "info")
     return redirect(url_for("cart"))
 
+
 @app.route("/clear_cart")
 def clear_cart():
     session.pop("cart", None)
@@ -124,10 +131,12 @@ def clear_cart():
     flash("Cart cleared.", "info")
     return redirect(url_for("cart"))
 
+
 @app.route("/cart")
 def cart():
     items, total = cart_items_and_total()
     return render_template("cart.html", items=items, total=total, money=money)
+
 
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
@@ -189,6 +198,7 @@ def checkout():
 
     return render_template("checkout.html", items=items, total=total, money=money)
 
+
 @app.route("/order/<order_id>")
 def order_confirmation(order_id):
     order = next((o for o in ORDERS if o["id"] == order_id), None)
@@ -205,7 +215,7 @@ def contact():
         if not (name and email and message):
             flash("Please fill all fields.", "danger")
             return render_template("contact.html")
-    
+
         print(f"[Contact] {name} <{email}>: {message}")
         flash("Thanks — message received. We'll contact you soon.", "success")
         return redirect(url_for("contact"))
@@ -214,6 +224,7 @@ def contact():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
+
 
 @app.errorhandler(500)
 def server_error(e):

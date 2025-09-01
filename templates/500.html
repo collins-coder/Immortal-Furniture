@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - Bush Furniture</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Bush Furniture</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="text-center">
+            <h1 class="display-3 text-warning">500</h1>
+            <h2 class="mb-3">Server Error</h2>
+            <p class="text-muted">Oops! Something went wrong on our end. Please try again later.</p>
+            <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Back to Home</a>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        &copy; {{ datetime.utcnow().year }} Bush Furniture. All Rights Reserved.
+    </footer>
+</body>
+</html>
